@@ -1,0 +1,7 @@
+{
+  "name": "vaccine-portal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
