@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">vaccine-portal</string>
+    <string name="title_activity_main">vaccine-portal</string>
+    <string name="package_name">io.ionic.himanshu</string>
+    <string name="custom_url_scheme">io.ionic.himanshu</string>
+</resources>

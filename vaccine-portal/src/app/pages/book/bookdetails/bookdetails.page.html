@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Booking Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-input type="text" [value]="record?.name"></ion-input>
+  <ion-input type="date" [value]="record?.date | date: 'yyyy-MM-dd'"></ion-input>
+
+</ion-content>

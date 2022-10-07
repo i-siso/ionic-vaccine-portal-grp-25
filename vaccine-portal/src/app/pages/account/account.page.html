@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="profile">
+  <ion-card  class="ion-text-center">
+    <img *ngIf="imgUrl" [ngStyle]="{'border-radius':'50%'}" height="152px" [src]="imgUrl"/>
+    <ion-icon *ngIf="!imgUrl" style="font-size: 152px;" name="person-outline"></ion-icon>
+    <ion-card-header>
+      <ion-card-title>{{profile?.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-button (click)="logout()">Logout</ion-button>
+  </ion-card>
+</ion-content>
