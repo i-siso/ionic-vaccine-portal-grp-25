@@ -1,14 +1,33 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+      <ion-button color="medium" (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
-    <ion-title>Booking Details</ion-title>
+    <ion-title>Edit Booking</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()">Confirm</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-input type="text" [value]="record?.name"></ion-input>
-  <ion-input type="date" [value]="record?.date | date: 'yyyy-MM-dd'"></ion-input>
-
+<ion-content class="ion-padding">
+  <form [formGroup]="vaccineForm">
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+      <ion-note slot="error" *ngIf="vaccineForm.get('name').hasError('required')">Name is required</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Count</ion-label>
+      <ion-input type="number" formControlName="vaccinescount"></ion-input>
+      <ion-note slot="error" *ngIf="vaccineForm.get('vaccinescount').hasError('required')">Count is required</ion-note>
+      <ion-note slot="error" *ngIf="vaccineForm.get('vaccinescount').hasError('min')">Please enter valid number</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-input type="date" formControlName="date"></ion-input>
+      <ion-note slot="error" *ngIf="vaccineForm.get('date').hasError('required')">Date is required</ion-note>
+      <ion-note slot="error" *ngIf="vaccineForm.get('date').hasError('LessThanToday')">Invalid Date</ion-note>
+    </ion-item>
+  </form>
 </ion-content>

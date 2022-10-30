@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ViewWillEnter } from '@ionic/angular';
+import { ModalController, ViewWillEnter } from '@ionic/angular';
 import { UserService } from 'src/app/services/user.service';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { BookdetailsPage } from './bookdetails/bookdetails.page';
 
 export class DateValidator {
   static LessThanToday(control: FormControl): ValidationErrors | null {
-       let today : Date = new Date();
-      if (new Date(control.value) < today)
-          return { "LessThanToday": true };
-      return null;
+    let today: Date = new Date();
+    if (new Date(control.value) < today)
+      return { "LessThanToday": true };
+    return null;
   }
 }
 
@@ -24,7 +25,7 @@ export class BookPage implements ViewWillEnter, OnInit {
   @ViewChild(IonModal) modal: IonModal;
   vaccineForm: FormGroup
 
-  constructor(private userService: UserService, private formBuilder: FormBuilder) { }
+  constructor(private userService: UserService, private formBuilder: FormBuilder, private modalCtrl: ModalController) { }
   ngOnInit(): void {
     this.vaccineForm = this.formBuilder.group({
       name: ["", [Validators.required]],
@@ -41,7 +42,7 @@ export class BookPage implements ViewWillEnter, OnInit {
 
   async getVaccinationSlots() {
     this.records = []
-    this.records = (await this.userService.getRecordList('vaccinedrive', false, '+date,+name', null)).items
+    this.records = (await this.userService.getRecordList('vaccinedrive', true, '+date,+name', null))
     console.log(this.records)
   }
 
@@ -61,6 +62,23 @@ export class BookPage implements ViewWillEnter, OnInit {
       await this.userService.createRecord('vaccinedrive', ev.detail.data, 'created_by')
       this.getVaccinationSlots()
 
+    }
+  }
+
+  async openModal(selected) {
+    console.log(selected)
+    if (new Date(selected.date) > new Date()) {
+      const modal = await this.modalCtrl.create({
+        component: BookdetailsPage,
+        componentProps: { "record": selected }
+      });
+      modal.present();
+
+      const { data, role } = await modal.onWillDismiss();
+
+      if (role === 'confirm') {
+        console.log(`Hello, ${data}!`);
+      }
     }
   }
 
