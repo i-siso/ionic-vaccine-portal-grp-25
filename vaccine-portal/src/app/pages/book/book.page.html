@@ -7,6 +7,8 @@
 </ion-header>
 
 <ion-content>
+  <ng-container *ngIf="records.length;else emptyList">
+
     <ion-card *ngFor="let item of records" (click)="openModal(item)" class="ion-activated">
       <ion-card-header>
         <ion-card-title>{{item.name}}</ion-card-title>
@@ -16,6 +18,17 @@
         </ion-card-subtitle>
       </ion-card-header>
     </ion-card>
+
+    
+  </ng-container>
+
+  <ng-template #emptyList>
+    <ion-card color="primary" style="height: 30vh">
+      <ion-card-header>
+        <ion-card-title>No Records Found!</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ng-template>
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button id="open-modal" expand="block">
@@ -31,7 +44,7 @@
           </ion-buttons>
           <ion-title>Book Vaccination Drive</ion-title>
           <ion-buttons slot="end">
-            <ion-button  (click)="confirm()" [disabled]="!vaccineForm.valid" [strong]="true">Confirm</ion-button>
+            <ion-button (click)="confirm()" [disabled]="!vaccineForm.valid" [strong]="true">Confirm</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
@@ -45,8 +58,10 @@
           <ion-item>
             <ion-label>Count</ion-label>
             <ion-input type="number" formControlName="vaccinescount"></ion-input>
-            <ion-note slot="error" *ngIf="vaccineForm.get('vaccinescount').hasError('required')">Count is required</ion-note>
-            <ion-note slot="error" *ngIf="vaccineForm.get('vaccinescount').hasError('min')">Please enter valid number</ion-note>
+            <ion-note slot="error" *ngIf="vaccineForm.get('vaccinescount').hasError('required')">Count is required
+            </ion-note>
+            <ion-note slot="error" *ngIf="vaccineForm.get('vaccinescount').hasError('min')">Please enter valid number
+            </ion-note>
           </ion-item>
           <ion-item>
             <ion-label>Date</ion-label>

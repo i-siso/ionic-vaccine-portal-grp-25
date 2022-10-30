@@ -5,5 +5,29 @@
 </ion-header>
 
 <ion-content>
+  <div>
+
+    <ion-card color="primary" style="height: 30vh">
+      <ion-card-header>
+        <ion-card-title>Students Vaccinated</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf="students">
+        <div class="card-align">
+          {{students.done}}/{{students.total}}
+        </div>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card color="warning" style="height: 30vh;">
+      <ion-card-header>
+        <ion-card-title>Slots Completed</ion-card-title>
+      </ion-card-header>
+      <ion-card-content *ngIf="vaccines">
+        <div class="card-align">
+          {{vaccines.done}}/{{vaccines.total}}
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
 </ion-content>

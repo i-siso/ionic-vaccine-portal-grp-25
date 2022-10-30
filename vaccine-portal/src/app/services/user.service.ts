@@ -76,12 +76,12 @@ export class UserService {
 
   }
 
-  async getRecordList(collectionname, all = false, sortby, filterby, page?, pageNo?) {
+  async getRecordList(collectionname, all = false, sortby, filterby, page?, perPage?) {
     let recordList
     let options = { sort: sortby, filter: filterby }
     console.log(options)
     if (!all) {
-      recordList = await this.client.records.getList(collectionname, page, pageNo, options)
+      recordList = await this.client.records.getList(collectionname, page, perPage, options)
     } else {
       // alternatively you can also fetch all records at once via getFullList:
       recordList = await this.client.records.getFullList(collectionname, null /* batch size */, options);
