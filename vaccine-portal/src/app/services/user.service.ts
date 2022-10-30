@@ -84,7 +84,7 @@ export class UserService {
       recordList = await this.client.records.getList(collectionname, page, pageNo, options)
     } else {
       // alternatively you can also fetch all records at once via getFullList:
-      recordList = await this.client.records.getFullList(collectionname, 200 /* batch size */, options);
+      recordList = await this.client.records.getFullList(collectionname, null /* batch size */, options);
     }
     console.log(recordList)
     return recordList;
