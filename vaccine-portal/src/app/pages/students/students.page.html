@@ -13,15 +13,94 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid>
-    <ion-row>
-    
-    </ion-row>
-  </ion-grid>
+  <div class="example-header">
+    <mat-form-field >
+      <input (focus)="checkPlaceHolder()" (blur)="checkPlaceHolder()" matInput placeholder=" {{myplaceHolder}} " (keyup)="applyFilter($event.target.value)">
+    </mat-form-field>
+  </div>
 
+  <div class="example-container mat-elevation-z8">
+  
+    <mat-table [dataSource]="dataSource" matSort>
+  
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+      </ng-container>
+
+       <!-- Age Column -->
+       <ng-container matColumnDef="age">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Age </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="icon-vaccination"> {{row.age}} </mat-cell>
+      </ng-container>
+  
+      <!-- Vaccinated Column -->
+      <ng-container matColumnDef="vaccinated" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Vaccinated </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="icon-vaccination"> 	
+          <div *ngIf="row.vaccinated === 'true';  else elseBlock"><mat-icon>check_circle_outline</mat-icon></div>
+          <ng-template #elseBlock ><mat-icon>cancel</mat-icon></ng-template>
+        </mat-cell>
+        
+      </ng-container>
+  
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator  [pageSize]="10"></mat-paginator>
+  </div>
+  
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button>
+    <ion-fab-button id="open-modal" expand="block">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+<!-- modal for adding the student-->
+  <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Add Your Details</ion-title>
+          <ion-buttons slot="end">
+            <ion-button  (click)="confirm()" [disabled]="!studentForm.valid" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form [formGroup]="studentForm">
+          <ion-item>
+            <ion-label>Name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+            <ion-note slot="error" *ngIf="studentForm.get('name').hasError('required')">Name is required</ion-note>
+          </ion-item>
+         
+          <ion-item>
+            <ion-label>Age</ion-label>
+            <ion-input type="number" formControlName="age"></ion-input>
+            <ion-note slot="error" *ngIf="studentForm.get('age').hasError('required')">Age is required</ion-note>  
+          </ion-item>
+          <ion-item>
+            <ion-label>Vaccinated</ion-label>
+            <ion-list>
+              <ion-item>
+                <ion-select placeholder="Vaccination done?" formControlName="vaccinated">
+                  <ion-select-option value="true">True</ion-select-option>
+                  <ion-select-option value="false">False</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>
+          </ion-item>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
