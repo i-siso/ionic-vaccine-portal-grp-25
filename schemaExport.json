@@ -1,0 +1,197 @@
+[
+    {
+        "id": "systemprofiles0",
+        "name": "profiles",
+        "system": true,
+        "listRule": "userId = @request.user.id",
+        "viewRule": "userId = @request.user.id",
+        "createRule": "userId = @request.user.id",
+        "updateRule": "userId = @request.user.id",
+        "deleteRule": null,
+        "schema": [
+            {
+                "id": "pbfielduser",
+                "name": "userId",
+                "type": "user",
+                "system": true,
+                "required": true,
+                "unique": true,
+                "options": {
+                    "maxSelect": 1,
+                    "cascadeDelete": true
+                }
+            },
+            {
+                "id": "pbfieldname",
+                "name": "name",
+                "type": "text",
+                "system": false,
+                "required": false,
+                "unique": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "pbfieldavatar",
+                "name": "avatar",
+                "type": "file",
+                "system": false,
+                "required": false,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "maxSize": 5242880,
+                    "mimeTypes": [
+                        "image/jpg",
+                        "image/jpeg",
+                        "image/png",
+                        "image/svg+xml",
+                        "image/gif"
+                    ],
+                    "thumbs": null
+                }
+            }
+        ]
+    },
+    {
+        "id": "qbc1r1b9wmooiwp",
+        "name": "students",
+        "system": false,
+        "listRule": "created_by = @request.user.id",
+        "viewRule": "created_by = @request.user.id",
+        "createRule": "created_by = @request.user.id",
+        "updateRule": "created_by = @request.user.id && (@request.data.user = \"\" ||@request.data.user = @request.user.id)",
+        "deleteRule": "created_by = @request.user.id",
+        "schema": [
+            {
+                "id": "gsy79c7h",
+                "name": "name",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "imkzyn3c",
+                "name": "age",
+                "type": "number",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": 1,
+                    "max": 100
+                }
+            },
+            {
+                "id": "uzcmxonx",
+                "name": "vaccinated",
+                "type": "select",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "values": [
+                        "true",
+                        "false"
+                    ]
+                }
+            },
+            {
+                "id": "kvk43yhe",
+                "name": "vaccinedrive",
+                "type": "relation",
+                "system": false,
+                "required": false,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "collectionId": "lsdp3polxjru8d7",
+                    "cascadeDelete": false
+                }
+            },
+            {
+                "id": "7lzzfbge",
+                "name": "created_by",
+                "type": "user",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "cascadeDelete": false
+                }
+            }
+        ]
+    },
+    {
+        "id": "lsdp3polxjru8d7",
+        "name": "vaccinedrive",
+        "system": false,
+        "listRule": "created_by = @request.user.id",
+        "viewRule": "created_by = @request.user.id",
+        "createRule": "created_by = @request.user.id",
+        "updateRule": "created_by = @request.user.id && (@request.data.user = \"\" ||@request.data.user = @request.user.id) && @now < created",
+        "deleteRule": "created_by = @request.user.id",
+        "schema": [
+            {
+                "id": "z56nc3j2",
+                "name": "date",
+                "type": "date",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": "",
+                    "max": ""
+                }
+            },
+            {
+                "id": "3ok4kjty",
+                "name": "vaccinescount",
+                "type": "number",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": 1,
+                    "max": null
+                }
+            },
+            {
+                "id": "gspyfijb",
+                "name": "name",
+                "type": "text",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "min": null,
+                    "max": null,
+                    "pattern": ""
+                }
+            },
+            {
+                "id": "lal1zuux",
+                "name": "created_by",
+                "type": "user",
+                "system": false,
+                "required": true,
+                "unique": false,
+                "options": {
+                    "maxSelect": 1,
+                    "cascadeDelete": false
+                }
+            }
+        ]
+    }
+]
