@@ -140,7 +140,7 @@
         "listRule": "created_by = @request.user.id",
         "viewRule": "created_by = @request.user.id",
         "createRule": "created_by = @request.user.id",
-        "updateRule": "created_by = @request.user.id && (@request.data.user = \"\" ||@request.data.user = @request.user.id) && @now < created",
+        "updateRule": "created_by = @request.user.id && (@request.data.user = \"\" ||@request.data.user = @request.user.id) && @now < date",
         "deleteRule": "created_by = @request.user.id",
         "schema": [
             {
