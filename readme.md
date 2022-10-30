@@ -30,3 +30,7 @@ Password: vaccineportal25
 Create a new User and untick "Send Verification Mail" for now.
 
 Once created, you can use those credentials to login into the app.
+
+For making it into a build:
+
+Use the following guide: https://ionicframework.com/docs/developing/android#project-setup with "Running with Capacitor" section
