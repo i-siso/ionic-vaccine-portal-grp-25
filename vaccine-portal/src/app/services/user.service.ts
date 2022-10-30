@@ -104,6 +104,14 @@ export class UserService {
     return record;
   }
 
+  async updateRecord(type, id, data, query, userreq){
+    if(userreq)
+      data[userreq]= this.authResult
+    let record
+    record = await this.client.records.update(type, id, data, query);
+    return record;
+  }
+
 
 
   get authResult$(): Observable<string> { return this._authResult$; }

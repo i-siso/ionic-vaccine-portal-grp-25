@@ -77,7 +77,8 @@ export class BookPage implements ViewWillEnter, OnInit {
       const { data, role } = await modal.onWillDismiss();
 
       if (role === 'confirm') {
-        console.log(`Hello, ${data}!`);
+        await this.userService.updateRecord('vaccinedrive', selected.id, data, null, null)
+        this.getVaccinationSlots()
       }
     }
   }
